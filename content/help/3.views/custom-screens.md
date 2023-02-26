@@ -16,3 +16,7 @@ For example, CSG, The Global Talent Experts, leveraged a Custom Screen to manage
 Custom Screens are available on our Custom plan and will be managed by your Project Admins. 
 
 <img alt="custom-screen-screen" src="/assets/images/mha-case-study-screen.png" />
+
+Custom screens will appear in the navigation bar for your users to access, as with all other screen types.
+
+[Contact us](/custom/contact/) for more information about this.

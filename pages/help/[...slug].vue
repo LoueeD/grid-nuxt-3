@@ -61,7 +61,6 @@ const groups = computed(() => {
     flex-grow: 1;
     max-width: 1280px;
     padding: 0 30px;
-    align-items: flex-start;
     display: flex;
 
     .sidebar {
@@ -69,7 +68,7 @@ const groups = computed(() => {
       width: 320px;
       top: var(--site-nav-height);
       height: calc(100vh - var(--site-nav-height));
-      padding: 0 1rem;
+      padding: 0 1rem 8rem;
       flex-shrink: 1;
       overflow: auto;
 
@@ -99,6 +98,7 @@ const groups = computed(() => {
 
     main {
       padding: 1rem;
+      font-size: 1.1em;
       border-left: 1px solid rgba(#111, 0.1);
       flex-grow: 1;
 
@@ -107,6 +107,27 @@ const groups = computed(() => {
         margin-right: auto;
         margin-left: auto;
         max-width: 768px;
+      }
+
+      :deep(p) {
+        line-height: 1.8em;
+      }
+
+      :deep(ol) {
+        padding-left: 18px;
+
+        li {
+          margin: 0 0 12px;
+          line-height: 1.8em;
+        }
+      }
+
+      :deep(img) {
+        max-width: 100%;
+        margin: 18px 0 34px;
+        border: 1px solid rgba(#111, 0.1);
+        border-radius: 4px;
+        display: block;
       }
 
       :deep(h2) {
