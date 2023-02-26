@@ -106,9 +106,15 @@ const groups = computed(() => {
       line-height: 1.3333333;
       border-bottom: 1px solid rgba(#111, 0.1);
       padding-bottom: 4px;
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
     }
 
     .paging {
+      padding: 120px 0;
       justify-content: space-between;
       display: flex;
       a {
