@@ -13,6 +13,7 @@
   --primary-dark: #2853a1;
 
   --site-width: 1280px;
+  --site-nav-height: 46px;
 }
 
 *,

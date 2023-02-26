@@ -16,112 +16,123 @@ const groups = computed(() => {
 
 <template>
   <div class="help">
-    <div class="sidebar">
-      <div class="group" v-for="group in groups" :key="group.title">
-        <div class="group-title">{{ group.title }}</div>
-        <template v-for="page in group.pages">
-          <router-link class="item" :to="page._path">
-            {{ page.title }}
-          </router-link>
-          <template v-if="path.includes(page._path)">
-            <router-link
-              class="toc"
-              v-for="link in page.body.toc.links"
-              :to="`${page._path}/#${link.id}`"
-              :key="link.text"
-            >
-              {{ link.text }}
+    <SiteNav />
+    <div class="help__page">
+      <div class="sidebar">
+        <div class="group" v-for="group in groups" :key="group.title">
+          <div class="group-title">{{ group.title }}</div>
+          <template v-for="page in group.pages">
+            <router-link class="item" :to="page._path">
+              {{ page.title }}
             </router-link>
+            <template v-if="path.includes(page._path)">
+              <a
+                class="toc"
+                v-for="link in page.body.toc.links"
+                :href="`#${link.id}`"
+                :key="link.text"
+              >
+                {{ link.text }}
+              </a>
+            </template>
           </template>
-        </template>
+        </div>
       </div>
+      <main>
+        <ContentDoc />
+        <div class="paging">
+          <NuxtLink v-if="prev" :to="prev._path">{{ prev.title }}</NuxtLink>
+          <NuxtLink v-if="next" :to="next._path">{{ next.title }}</NuxtLink>
+        </div>
+      </main>
     </div>
-    <main>
-      <ContentDoc />
-      <div class="paging">
-        <NuxtLink v-if="prev" :to="prev._path">{{ prev.title }}</NuxtLink>
-        <NuxtLink v-if="next" :to="next._path">{{ next.title }}</NuxtLink>
-      </div>
-    </main>
   </div>
 </template>
 
 <style lang="scss" scoped>
 .help {
-  margin: auto;
-  width: 100%;
-  max-width: 1280px;
-  padding: 0 30px;
-  min-height: 100vh;
+  flex: 1;
+  flex-direction: column;
   display: flex;
 
-  .sidebar {
-    position: sticky;
-    top: 0;
-    width: 320px;
-    padding: 0 1rem;
-    height: 100vh;
-    overflow: auto;
-
-    .group-title {
-      margin: 28px 0 12px;
-      text-transform: capitalize;
-      font-size: 0.9rem;
-      opacity: 0.5;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-      padding: 0.5rem 1rem;
-      border-left: 1px solid rgba(#111, 0.1);
-      display: block;
-
-      &.toc {
-        padding-left: 2rem;
-      }
-
-      &.router-link-active {
-        border-left: 1px solid rgba(#111, 0.4);
-      }
-    }
-  }
-
-  main {
-    padding: 1rem;
-    border-left: 1px solid rgba(#111, 0.1);
+  &__page {
+    margin: auto;
+    width: 100%;
     flex-grow: 1;
+    max-width: 1280px;
+    padding: 0 30px;
+    align-items: flex-start;
+    display: flex;
 
-    :deep(> *) {
-      width: 100%;
-      margin-right: auto;
-      margin-left: auto;
-      max-width: 768px;
-    }
+    .sidebar {
+      position: sticky;
+      width: 320px;
+      top: var(--site-nav-height);
+      height: calc(100vh - var(--site-nav-height));
+      padding: 0 1rem;
+      flex-shrink: 1;
+      overflow: auto;
 
-    :deep(h2) {
-      margin: 0;
-      font-weight: 700;
-      font-size: 1.5em;
-      margin-top: 2em;
-      margin-bottom: 1em;
-      line-height: 1.3333333;
-      border-bottom: 1px solid rgba(#111, 0.1);
-      padding-bottom: 4px;
+      .group-title {
+        margin: 28px 0 12px;
+        text-transform: capitalize;
+        font-size: 0.9rem;
+        opacity: 0.5;
+      }
 
       a {
         color: inherit;
         text-decoration: none;
+        padding: 0.5rem 1rem;
+        border-left: 1px solid rgba(#111, 0.1);
+        display: block;
+
+        &.toc {
+          padding-left: 2rem;
+        }
+
+        &.router-link-active {
+          border-left: 1px solid rgba(#111, 0.4);
+        }
       }
     }
 
-    .paging {
-      padding: 120px 0;
-      justify-content: space-between;
-      display: flex;
-      a {
-        padding: 1rem;
-        border: 1px solid rgba(#111, 0.1);
+    main {
+      padding: 1rem;
+      border-left: 1px solid rgba(#111, 0.1);
+      flex-grow: 1;
+
+      :deep(> *) {
+        width: 100%;
+        margin-right: auto;
+        margin-left: auto;
+        max-width: 768px;
+      }
+
+      :deep(h2) {
+        margin: 0;
+        font-weight: 700;
+        font-size: 1.5em;
+        margin-top: 2em;
+        margin-bottom: 1em;
+        line-height: 1.3333333;
+        border-bottom: 1px solid rgba(#111, 0.1);
+        padding-bottom: 4px;
+
+        a {
+          color: inherit;
+          text-decoration: none;
+        }
+      }
+
+      .paging {
+        padding: 120px 0;
+        justify-content: space-between;
+        display: flex;
+        a {
+          padding: 1rem;
+          border: 1px solid rgba(#111, 0.1);
+        }
       }
     }
   }
